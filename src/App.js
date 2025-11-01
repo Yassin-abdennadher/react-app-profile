@@ -12,7 +12,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   return (
     <BrowserRouter>
-      <Context.Provider value={{isLogged,setIsLogged}}>
+      <Context.Provider value={{isLogged,setIsLogged, currentUser, setCurrentUser }}>
         <div className="App">
           <header>
               {isLogged && (<nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">

@@ -2,5 +2,7 @@ import { createContext } from 'react'
 
 export const Context= createContext ({
     isLogged:false,
-    setIsLogged : ()=>{}
+    setIsLogged : ()=>{},
+    currentUser:null,
+    setCurrentUser:()=>{}
 });

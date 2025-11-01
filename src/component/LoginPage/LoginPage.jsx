@@ -6,44 +6,40 @@ import axios from 'axios';
 
 
 const LoginPage = () => {
-    const [email,setEmail]=useState('');
-    const [password,setPassword]=useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const {isLogged,setIsLogged} = useContext(Context);
-    const [usersData,setUsersData]=useState([]);
-    const navigate=useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const { setIsLogged, setCurrentUser } = useContext(Context);
+  const [usersData, setUsersData] = useState([]);
+  const navigate = useNavigate();
 
-    const fetchUsers =async ()=>{
-      try{
-        const response= await  axios.get('http://localhost:3001/users');
-        setUsersData(response.data);
-      }catch(error){
-        throw new Error("error with getting data");
-      }
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/users');
+      setUsersData(response.data);
+    } catch (error) {
+      throw new Error("error with getting data");
     }
+  }
 
-    useEffect(()=>{
-      fetchUsers();
-    },[]) 
+  useEffect(() => {
+    fetchUsers();
+  }, [])
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    usersData.forEach(user=>{
-      if(user.email===email && user.password===password){ 
-          setIsLogged(true);
-          navigate("/Profile",{state:{user}});
-      }else{
-        console.log("l'email ou le mot de passe est incorrect !!");
-      }
-      
-    })
-    console.log('Données du formulaire : \nemail : ',email,'\npassword : ',password);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
-  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const user = usersData.find(user => user.email === email && user.password === password);
+    if (user) {
+      setIsLogged(true);
+      setCurrentUser(user); // Stocke l'utilisateur dans le contexte
+      navigate("/Profile");
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="container-fluid vh-100">
@@ -106,7 +102,7 @@ const LoginPage = () => {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
-                        <span 
+                        <span
                           className="input-group-text password-toggle"
                           onClick={togglePasswordVisibility}
                           style={{ cursor: 'pointer' }}

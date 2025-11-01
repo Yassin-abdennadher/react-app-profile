@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './ProfilePage.css';
 import { useLocation } from 'react-router-dom';
+import { Context } from '../../PersHooks/Context';
 
 const ProfilePage = () => {
-  const location = useLocation();
-  const user = location.state?.user; // Récupère le user du state
+  // const location = useLocation();
+  // const user = location.state?.user; // Récupère le user du state
+  const {currentUser}=useContext(Context);
+
+  if (!currentUser) {
+    return <div>Utilisateur non connecté</div>;
+  }
 
   return (
     <div className="profile-container">
@@ -16,15 +22,15 @@ const ProfilePage = () => {
               <div className="text-center text-white slide-in-left">
                 <div className="avatar-container mb-4">
                   <img 
-                    src={user.avatar} 
+                    src={currentUser.avatar} 
                     alt="Profile" 
                     className="avatar-img"
                   />
                   <div className="online-indicator"></div>
                 </div>
-                <h2 className="mb-2">{user.firstName} {user.lastName}</h2>
-                <p className="lead mb-3">{user.profession}</p>
-                <p className="mb-4">{user.bio}</p>
+                <h2 className="mb-2">{currentUser.firstName} {currentUser.lastName}</h2>
+                <p className="lead mb-3">{currentUser.profession}</p>
+                <p className="mb-4">{currentUser.bio}</p>
                 <div className="social-links">
                   <button className="btn btn-outline-light btn-sm me-2">
                     <i className="fab fa-linkedin"></i>
@@ -58,14 +64,14 @@ const ProfilePage = () => {
                       <div className="info-item">
                         <i className="fas fa-user me-2 text-primary"></i>
                         <strong>Prénom:</strong>
-                        <span>{user.firstName}</span>
+                        <span>{currentUser.firstName}</span>
                       </div>
                     </div>
                     <div className="col-md-6 mb-3">
                       <div className="info-item">
                         <i className="fas fa-user me-2 text-primary"></i>
                         <strong>Nom:</strong>
-                        <span>{user.lastName}</span>
+                        <span>{currentUser.lastName}</span>
                       </div>
                     </div>
                   </div>
@@ -75,14 +81,14 @@ const ProfilePage = () => {
                       <div className="info-item">
                         <i className="fas fa-birthday-cake me-2 text-primary"></i>
                         <strong>Âge:</strong>
-                        <span>{user.age} ans</span>
+                        <span>{currentUser.age} ans</span>
                       </div>
                     </div>
                     <div className="col-md-6 mb-3">
                       <div className="info-item">
                         <i className="fas fa-phone me-2 text-primary"></i>
                         <strong>Téléphone:</strong>
-                        <span>{user.phone}</span>
+                        <span>{currentUser.phone}</span>
                       </div>
                     </div>
                   </div>
@@ -92,7 +98,7 @@ const ProfilePage = () => {
                       <div className="info-item">
                         <i className="fas fa-envelope me-2 text-primary"></i>
                         <strong>Email:</strong>
-                        <span>{user.email}</span>
+                        <span>{currentUser.email}</span>
                       </div>
                     </div>
                   </div>
@@ -102,7 +108,7 @@ const ProfilePage = () => {
                       <div className="info-item">
                         <i className="fas fa-map-marker-alt me-2 text-primary"></i>
                         <strong>Localisation:</strong>
-                        <span>{user.location}</span>
+                        <span>{currentUser.location}</span>
                       </div>
                     </div>
                   </div>
