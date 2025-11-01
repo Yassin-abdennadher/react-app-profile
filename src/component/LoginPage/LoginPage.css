@@ -1,0 +1,151 @@
+/* LoginPage.css */
+.login-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.left-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.left-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.right-section {
+  background-color: #f8f9fa;
+}
+
+.login-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: transform 0.3s ease;
+  max-width: 450px;
+  width: 100%;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+}
+
+.form-control {
+  border-radius: 10px;
+  border: 2px solid #e9ecef;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.input-group-text {
+  background-color: transparent;
+  border: 2px solid #e9ecef;
+  border-left: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-group:focus-within .input-group-text {
+  border-color: #667eea;
+}
+
+.login-btn {
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-outline-primary, .btn-outline-danger {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover, .btn-outline-danger:hover {
+  transform: translateY(-2px);
+}
+
+.slide-in-left {
+  animation: slideInLeft 1s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 1s ease-out;
+}
+
+.fa-rocket{
+    font-size: 2rem;
+}
+
+@keyframes slideInLeft {
+  from { 
+    opacity: 0; 
+    transform: translateX(-50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .left-section {
+    display: none !important;
+  }
+  
+  .right-section {
+    padding: 20px;
+  }
+  
+  .login-card {
+    margin: 0 10px;
+  }
+}
+
+/* Animation pour les icônes */
+.fas, .fab {
+  transition: transform 0.3s ease;
+}
+
+.btn:hover .fas,
+.btn:hover .fab {
+  transform: scale(1.1);
+}
