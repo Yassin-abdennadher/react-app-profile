@@ -1,20 +1,37 @@
-import react ,{useState} from 'react';
+import react, { useState } from 'react';
 import './ContactUs.css';
 
-const ContactUs = ()=>{
-    const [nom,setNom]=useState('');
-    const [email,setEmail]=useState('');
-    const [subject,setSubject]=useState('');
-    const [message,setMessage]=useState('');
+const ContactUs = () => {
+  const [nom, setNom] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
 
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-        console.log("message envoyé : \nNom : ",nom,"\nEmail : ",email,"\nSubject : ",subject,"\nMessage : ",message);
-        alert('message envoyé avec succées, nous vous contacterons le plus tot possible. Merci pour votre confiance');
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("message envoyé : \nNom : ", nom, "\nEmail : ", email, "\nSubject : ", subject, "\nMessage : ", message);
+    // alert('message envoyé avec succées, nous vous contacterons le plus tot possible. Merci pour votre confiance');
+  }
 
-     return (
+  return (
     <div className="contact-container">
+      <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-scrollable">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">Message Envoyé</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {`message envoyé : \nNom : ", ${nom}, "\nEmail : ", ${email}, "\nSubject : ", ${subject}, "\nMessage : ", ${message}`}
+            </div>
+            <div class="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container-fluid">
         <div className="row ">
           {/* Partie gauche - Informations de contact */}
@@ -24,7 +41,7 @@ const ContactUs = ()=>{
                 <i className="fas fa-envelope display-1 mb-4"></i>
                 <h2 className="mb-3">Contactez-nous</h2>
                 <p className="lead mb-4">Nous sommes là pour vous aider</p>
-                
+
                 <div className="contact-info text-start">
                   <div className="info-item mb-3">
                     <i className="fas fa-phone me-3"></i>
@@ -74,7 +91,7 @@ const ContactUs = ()=>{
                         name="name"
                         placeholder="Votre nom complet"
                         value={nom}
-                        onChange={(e)=>{setNom(e.target.value)}}
+                        onChange={(e) => { setNom(e.target.value) }}
                         required
                       />
                     </div>
@@ -92,7 +109,7 @@ const ContactUs = ()=>{
                         name="email"
                         placeholder="votre@email.com"
                         value={email}
-                        onChange={(e)=>{setEmail(e.target.value)}}
+                        onChange={(e) => { setEmail(e.target.value) }}
                         required
                       />
                     </div>
@@ -110,7 +127,7 @@ const ContactUs = ()=>{
                         name="subject"
                         placeholder="Objet de votre message"
                         value={subject}
-                        onChange={(e)=>{setSubject(e.target.value)}}
+                        onChange={(e) => { setSubject(e.target.value) }}
                         required
                       />
                     </div>
@@ -128,20 +145,23 @@ const ContactUs = ()=>{
                         rows="5"
                         placeholder="Votre message..."
                         value={message}
-                        onChange={(e)=>{setMessage(e.target.value)}}
+                        onChange={(e) => { setMessage(e.target.value) }}
                         required
                       ></textarea>
                     </div>
 
                     {/* Bouton d'envoi */}
                     <button
-                      type="submit"
+                      type="button"
                       className="btn btn-primary w-100 py-2 contact-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
                     >
                       <i className="fas fa-paper-plane me-2"></i>
                       Envoyer le message
                     </button>
                   </form>
+
 
                   {/* Réseaux sociaux */}
                   <div className="text-center mt-4">
