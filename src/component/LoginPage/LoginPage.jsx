@@ -15,7 +15,7 @@ const LoginPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/users');
+      const response = await axios.get('http://localhost:3002/users');
       setUsersData(response.data);
     } catch (error) {
       throw new Error("error with getting data");
@@ -35,7 +35,7 @@ const LoginPage = () => {
     const user = usersData.find(user => user.email === email && user.password === password);
     if (user) {
       setIsLogged(true);
-      setCurrentUser(user); // Stocke l'utilisateur dans le contexte
+      setCurrentUser(user);
       navigate("/Profile");
     }
   };
